@@ -2,7 +2,7 @@
 
 A Kubernetes plugin to get all information from a Pod before deleting it.
 
-[Install] the plugin and try it:
+[Install](https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/#installing-kubectl-plugins) the plugin and try it:
 
 ```
 kubectl torture <pod>
