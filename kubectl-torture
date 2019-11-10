@@ -1,0 +1,21 @@
+#!/bin/bash
+
+pod=$1
+
+if [ "$pod" == "" ]; then
+    echo "usage: oc-torture <pod>"
+    exit 1
+fi
+
+rm -rf $pod
+mkdir -p $pod/logs
+
+# get manifests
+kubectl get pod $pod -o yaml > $pod/pod.yaml
+kubectl get pod $pod -o json > $pod/pod.json
+
+# get container logs
+containers=$(cat $pod/pod.json | jq -r .spec.containers[].name)
+for container in $containers; do
+    kubectl logs -c $container $pod > $pod/logs/$container.log
+done
